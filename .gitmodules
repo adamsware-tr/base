@@ -1,0 +1,18 @@
+[submodule "api-gateway"]
+	path = api-gateway
+	url = https://github.com/adamsware-tr/api-gateway.git
+[submodule "authentication"]
+	path = authentication
+	url = https://github.com/adamsware-tr/authentication.git
+[submodule "discovery-server"]
+	path = discovery-server
+	url = https://github.com/adamsware-tr/discovery-server.git
+[submodule "parent"]
+	path = parent
+	url = https://github.com/adamsware-tr/parent.git
+[submodule "post"]
+	path = post
+	url = https://github.com/adamsware-tr/post.git
+[submodule "user"]
+	path = user
+	url = https://github.com/adamsware-tr/user.git

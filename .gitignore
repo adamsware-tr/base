@@ -1,0 +1,75 @@
+# Maven and Gradle
+target/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Java-specific
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot-specific
+spring.log
+
+# Security files
+*.pem
+*.key
+*.crt
+
+# Environment files
+.env
+*.env.*
+
+# Node.js (if frontend is included in the same repo)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Dependencies
+/.mvn/wrapper/maven-wrapper.jar
+/.mvn/wrapper/maven-wrapper.properties
+
+# Gradle Wrapper
+.gradle/
+!gradle-wrapper.jar

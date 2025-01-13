@@ -1,0 +1,95 @@
+version: "3.8"
+
+services:
+  # User Service
+  user-service:
+    build:
+      context: .
+      dockerfile: ./user/user-srv/Dockerfile
+    container_name: user-service
+    ports:
+      - "8082:8082"
+    environment:
+      - ENV_DB_HOST=postgresql
+      - ENV_DB_PORT=5432
+      - ENV_DB_NAME=confession
+      - ENV_DB_SCHEME=user
+      - ENV_DB_USR=myuser
+      - ENV_DB_PWD=mypassword
+    depends_on:
+      - postgresql
+      - rabbitmq
+      - discovery-server
+
+
+  # Authentication Service
+  authentication-service:
+    build:
+      context: .
+      dockerfile: ./authentication/authentication-srv/Dockerfile
+    container_name: authentication-service
+    ports:
+      - "8083:8083"
+    environment:
+      - ENV_DB_HOST=postgresql
+      - ENV_DB_PORT=5432
+      - ENV_DB_NAME=confession
+      - ENV_DB_SCHEME=auth
+      - ENV_DB_USR=myuser
+      - ENV_DB_PWD=mypassword
+    depends_on:
+      - postgresql
+      - rabbitmq
+      - discovery-server
+
+        # Authentication Service
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+
+  # Discovery Server
+  discovery-server:
+    build:
+      context: .
+      dockerfile: ./discovery-server/Dockerfile
+    container_name: discovery-server
+    ports:
+      - "8761:8761" # Discovery server genelde 8761 kullanır
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ broker portu
+      - "15672:15672" # RabbitMQ yönetim konsolu portu
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  # PostgreSQL
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: confession
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: secret
